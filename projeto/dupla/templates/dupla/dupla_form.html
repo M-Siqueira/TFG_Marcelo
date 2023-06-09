@@ -1,0 +1,33 @@
+{% extends 'core/base.html' %}
+{% load bootstrap3 %}
+
+{% block actions %}
+{% endblock %}
+
+{% block title %}
+	{% bootstrap_icon 'cog' %} Geração/montagem da Dupla
+{% endblock %}
+
+{% block content %}
+<form class="form" role="form" method="POST">
+    {% csrf_token %}
+    
+    {% for error in form.non_field_errors %}
+      {% bootstrap_alert error 'danger' %}
+    {% endfor %}
+    
+    {% comment %} {% bootstrap_form form %} {% endcomment %}
+
+    {% if not object %}
+      {% bootstrap_field form.atleta_direita %}
+      {% bootstrap_field form.atleta_esquerda %}
+    {% else %}
+      <h4>Direita: </h4>{{ object.atleta_direita.atleta.apelido }}<br>
+      <h4>Esquerda: </h4>{{ object.atleta_esquerda.atleta.apelido }}<br><br>
+      {% bootstrap_field form.pontuacao_dupla %}
+    {% endif %}
+    {% buttons submit='Gravar' %}
+       <a href="javascript:history.go(-1);" class="btn btn-info" role="button">Voltar</a>
+    {% endbuttons %}
+</form>
+{% endblock %}
