@@ -6,42 +6,36 @@
 {% block title %}Longevos / Login{% endblock %}
 
 {% block content %}  
+  <hr>
   <div class="row">    
     <div class="col-xs-12 col-sm-12 col-md-4 col-lg-4">
       <center>
         <br>
-        <img src="{% static 'core/img/logoLongevos.jpeg' %}" class="img-responsive" style="max-width: 150px;">        
+        <img src="{% static 'core/img/logo_si.png' %}" class="img-responsive" style="max-width: 250px;">        
       </center> 
       <center>       
         <h3>História</h3>
         <p>
-          "Como é bom ver a velha guarda do padel reunida. Se o padel está onde está, é por que vocês foram os precursores e deixaram vivo 
-          o esporte, quando era apenas uma novidade nos anos 90. Como é na vida, trabalhamos a vida toda para ver os filhos crescerem, então  
-          estamos aqui só curtindo o que construímos juntos: uma Santa Maria com as melhores estruturas do Brasil.
-          'Velharada' da pré história (quadra alvenaria) para o mundo digital (quadras de vidros) curtam e desfrutem de cada partida jogada".
-          <br>
-          <p><b>Professor Lucas 'Neguinho' de Souza</b></p>
+          Este trabalho visa complementar o sistema projetado e implementado por Aloísio Kneipp
+          dos Santos, nominado de "Sistemas Pervasivos Integrados por Agentes Inteligentes em 
+          JASON e Raspberry Pi", via o projeto e a implementação de um sistema Web para gestão 
+          de usuários e seus perfis em ambientes, como cômodos em uma casa, no que se refere a  
+          preferências de iluminação e temperatura. <br>
+          O sistema Web integra dados de preferências e de usuários na simulação criada por 
+          meio de um Web Service. Para isso, as tecnologias Python, Django e Bootstratp são 
+          utilizadas para a construção dessa plataforma.
         </p>
-        <h3>Treinadores Star Padel</h3>
-        
-          <a href="https://instagram.com/carlinhos_star_padel_club?igshid=MzRlODBiNWFlZA==" target="_blank">Carlos Augusto Uruguaiana</a><br>
-          <a href="https://instagram.com/german.faure?igshid=MzRlODBiNWFlZA==" target="_blank">German Faure</a><br>
-          <a href="https://www.instagram.com/prof.lucasdesouza/" target="_blank">Lucas de Souza</a><br>
-          <a href="https://instagram.com/profnicopadel?igshid=MzRlODBiNWFlZA==" target="_blank">Nielsen 'Nico' </a><br>
-        
+        <h3>Materiais para leitura</h3>       
+          <a href="https://tfgonline.lapinf.ufn.edu.br/media/midias/TFG_Aloisio_jpaOLeO.pdf" target="_blank">Trabalho Aloisio Kneipp dos Santos</a><br>                 
       </center>        
     </div>
     <div class="col-xs-12 col-sm-12 col-md-4 col-lg-5">
-      <h3 align="center">Ranking</h3>      
-      <p align="center">Relação dos atletas e suas pontuações....</p>
-
-      <h3 align="center">Jogos e Placares</h3>      
-      <p align="center">Jogos e Placares do torneio vigente</p>
+      
     </div>
 
     <div class="col-xs-12 col-sm-12 col-md-4 col-lg-3">
-      <h3 class="text-center">Área de Longevos</h3>
-      <p align="center"><small>Acesse o sistema para manter seus dados atualizados, fazer a inscrição em torneios e acompanhar seu desempenho.</small></p>
+      <h3 class="text-center">Área de Usuários</h3>
+      <p align="center"><small>Acesse o sistema para manter seus dados atualizados e suas preferências de iluminação e de climatização.</small></p>
       <div class="account-wall">
         <form class="form-signin" method="POST">
         {% csrf_token %}
@@ -57,25 +51,19 @@
         </p> 
         </form>
         <p align="justify"><small>
-          Projeto Extensionista do Curso Ciência da Computação da Universidade Franciscana, em parceria com Team Neguinho e 
-          Star Padel Club. A ideia foi integrar os alunos da disciplina Tópicos Avançados em Computação,
-          com uma demanda da comunidade, envolvendo a experiência de uma empresa de Tecnologia da Informação - ER Sistemas.</small>
+          Projeto de Trabalho Final de Curso em Sistemas de Informação da Universidade Franciscana, acadêmico Marcelo Silva de Siqueira e do orientador Alexandre Zamberlan.</small>
         </p>
       </div>
       <div class="alert alert-info text-center">
         <p class="text-center">
-            <small><a href="https://www.lapinf.ufn.edu.br" target="_blank">Laboratório de Práticas Computação UFN</a>
+            <small><a href="https://www.lapinf.ufn.edu.br" target="_blank">Sistemas de Informação UFN</a>
             <br>Copyright &copy; <script>document.write(new Date().getFullYear());</script>
         </p>
       </div> 
     </div>
   </div>
-  <div align="center">
-    <a href="https://www.facebook.com/teamneguinholucas/" target="_blank"><img src="{% static 'core/img/logoTeamNeguinho.jpg' %}" style="width: 120px;"></a>
-    <a href="https://www.starpadelclub.com.br/" target="_blank"><img src="{% static 'core/img/logoStarPadel.png' %}" style="width: 120px;"></a>
-    <a href="http://site.ersistemas.info" target="_blank"><img src="{% static 'core/img/logoERSistemas.jpeg' %}" style="width: 90px;"></a>
+  <div align="center">  
     <a href="https://www.ufn.edu.br" target="_blank"><img src="{% static 'core/img/logoUFN_hor.jpg' %}" style="width: 130px;"></a>
   </div>  
-  <br>
-   
+  <hr>   
 {% endblock %}
