@@ -18,14 +18,6 @@ from usuario.models import Usuario
 from .forms import InscricaoForm
 
 
-# class HomeRedirectView(LoginRequiredMixin, RedirectView):
-#     def get_redirect_url(self, **kwargs):
-#         if self.request.user.tipo == 'ADMINISTRADOR' or self.request.user.tipo == 'TREINADOR':
-#             return reverse('home')
-#         elif self.request.user.tipo == 'ATLETA':
-#             return reverse('appatleta_home')        
-
-
 class HomeView(LoginRequiredMixin, AtletaRequiredMixin, TemplateView):
     template_name = 'appatleta/home.html'
 
@@ -69,19 +61,19 @@ class InscricaoCreateView(LoginRequiredMixin, AtletaRequiredMixin, CreateView):
     
     def get_initial(self):
         initials = super().get_initial()
-        initials['usuario'] = Usuario.objects.get(id=self.request.GET.get('usuario_id'))
+        initials['usuario'] = Usuario.objects.get(id=self.request.user.id)
         return initials
     
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
-        context['atleta'] = Usuario.objects.get(id=self.request.GET.get('usuario_id'))
+        context['atleta'] = Usuario.objects.get(id=self.request.user.id)
         return context
 
     def form_valid(self, form):
         try:
             formulario = form.save(commit=False)
-            formulario.atleta = Usuario.objects.get(id=self.request.GET.get('usuario_id'))
-
+            formulario.atleta = self.request.user
+            
             if ((formulario.etapa.total_duplas * 2) - (formulario.etapa.inscritos_direita + formulario.etapa.inscritos_esquerda) == 0):
                 messages.error(self.request,"Não há mais vagas para nenhuma posição. Inscrição NÃO realizada. Aguarde liberar uma vaga!!!")  
                 return super().form_invalid(form)
@@ -96,31 +88,31 @@ class InscricaoCreateView(LoginRequiredMixin, AtletaRequiredMixin, CreateView):
                     return super().form_invalid(form)
                 formulario.etapa.inscritos_esquerda += 1
 
+            try:
+                """ enviar e-mail para atleta """
+                message = EmailMessage('usuario/email/inscricao_atleta.html', {'inscricao': self.object},
+                        settings.EMAIL_HOST_USER, to=[self.object.atleta.email])
+                message.send()
+            except:
+                # alterar para outro tipo de requisição http
+                messages.warning(self.request, "Inscrição realizada mas SEM NOTIFICAÇÃO POR EMAIL AO ATLETA!!")
+                
             formulario.etapa.save()
+            return super().form_valid(form)
 
         except Exception as e:
-            messages.error(self.request, 'Erro ao inscrever-se na etapa. %s' % e)
-                
-        try:
-            """ enviar e-mail para atleta """
-            message = EmailMessage('usuario/email/inscricao_atleta.html', {'inscricao': self.object},
-                    settings.EMAIL_HOST_USER, to=[self.object.atleta.email])
-            message.send()
-        except:
-            # alterar para outro tipo de requisição http
-            messages.warning(self.request, "Inscrição realizada mas SEM NOTIFICAÇÃO POR EMAIL AO ATLETA!!")
-
-        return super().form_valid(form)
-        
+            messages.error(self.request, 'Erro ao inscrever-se na etapa. Verifique se você já não está inscrito na etapa')
+            return super().form_invalid(form)
     
     def get_success_url(self):
-        messages.success(self.request, 'Inscrição cadastrada com sucesso na plataforma!')
+        messages.success(self.request, 'Inscrição realizada com sucesso na plataforma!')
         return reverse(self.success_url)
     
 
 class InscricaoDeleteView(LoginRequiredMixin, AtletaRequiredMixin, DeleteView):
     model = Inscricao
-    success_url = 'appatleta/inscricao_list.html'
+    template_name = 'appatleta/inscricao_confirm_delete.html'
+    success_url = 'appatleta_inscricao_list'
 
     def delete(self, request, *args, **kwargs):
         """
@@ -128,19 +120,22 @@ class InscricaoDeleteView(LoginRequiredMixin, AtletaRequiredMixin, DeleteView):
         success URL. If the object is protected, send an error message.
         """
         self.object = self.get_object()
+        etapa_atual = self.object.etapa
+        posicao = self.object.posicao_etapa
         
         try:
-            if (self.object.posicao_etapa == "DIREITA"):
-                self.object.etapa.inscritos_direita -= 1
-            
-            if (self.object.posicao_etapa == "ESQUERDA"):
-                self.object.etapa.inscritos_esquerda -= 1
-            
-            self.object.etapa.save()
             self.object.delete()
             
+            if (posicao == "DIREITA"):
+                etapa_atual.inscritos_direita -= 1
+            
+            if (posicao == "ESQUERDA"):
+                etapa_atual.inscritos_esquerda -= 1
+            
+            etapa_atual.save()
+            
         except Exception as e:
-            messages.error(request, 'Há dependências ligadas a essa Inscrição, permissão negada!')
+            messages.error(request, 'Já não é mais possível cancelar a inscrição, permissão negada!')
         return redirect(self.success_url)        
 
 

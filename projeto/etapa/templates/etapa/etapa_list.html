@@ -15,11 +15,12 @@
   		<thead>
 			<th>Local</th>
 			<th class="text-center">Grupo/Turma</th>
-  			<th>Data</th>
+  			<th class="text-center"> Data</th>
 			<th class="text-center">Total duplas</th>
 			<th class="text-center">Total chaves</th>
 			<th class="text-center">Quantidade direitas</th>
 			<th class="text-center">Quantidade esquerdas</th>
+			<th class="text-center">Inscrições abertas</th>
 			<th class="text-center">Ativo</th>
             <th class="text-center">Gerar chaves Automático</th>
   			<th class="text-center">Editar</th>
@@ -31,14 +32,23 @@
 				<tr>
 					<td>{{ etapa.local }}</td>
 					<td class="text-center">{{ etapa.grupo }}</td>
-					<td>{{ etapa.data|date:'d/m/Y' }}</td>
+					<td class="text-center">{{ etapa.data|date:'d/m/Y' }}</td>
 					<td class="text-center">{{ etapa.total_duplas }}</td>
 					<td class="text-center">{{ etapa.total_chaves }}</td>
 					<td class="text-center">{{ etapa.inscritos_direita }}</td>
 					<td class="text-center">{{ etapa.inscritos_esquerda }}</td>
 					<td class="text-center">
+						{% if etapa.inscricoes_abertas %}
+							SIM
+						{% else %}
+							NÃO
+						{% endif %}
+					</td>
+					<td class="text-center">
 						{% if etapa.is_active %}
-							{% bootstrap_icon 'ok' size='sm' %}
+							{% bootstrap_icon 'thumbs-up' size='sm' %}
+						{% else %}
+							{% bootstrap_icon 'thumbs-down' size='sm' %}
 						{% endif %}
 					</td>
                     <td class="text-center">
