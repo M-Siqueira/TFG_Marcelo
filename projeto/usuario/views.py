@@ -7,7 +7,7 @@ from django.urls import reverse
 from django.views.generic import ListView
 from django.views.generic.edit import CreateView, UpdateView, DeleteView
 
-from utils.decorators import LoginRequiredMixin, StaffRequiredMixin, TreinadorRequiredMixin
+from utils.decorators import LoginRequiredMixin, TreinadorRequiredMixin
 
 from .models import Usuario
 from .forms import BuscaUsuarioForm
@@ -41,14 +41,14 @@ class UsuarioListView(LoginRequiredMixin, TreinadorRequiredMixin, ListView):
             pesquisa = form.cleaned_data.get('pesquisa')
 
             if pesquisa:
-                qs = qs.filter(Q(nome__icontains=pesquisa) | Q(apelido__icontains=pesquisa) | Q(posicao__icontains=pesquisa))
+                qs = qs.filter(Q(nome__icontains=pesquisa))
             
         return qs
 
 
 class UsuarioCreateView(LoginRequiredMixin, TreinadorRequiredMixin, CreateView):
     model = Usuario
-    fields = ['tipo', 'grupo', 'nome', 'apelido', 'data_nascimento', 'posicao', 'pontuacao', 'qtd_etapas_jogadas', 'is_active', 'celular', 'email','password'] 
+    fields = ['tipo', 'nome', 'celular', 'password', 'is_active'] 
     
     success_url = 'usuario_list'
     
@@ -59,7 +59,7 @@ class UsuarioCreateView(LoginRequiredMixin, TreinadorRequiredMixin, CreateView):
 
 class UsuarioUpdateView(LoginRequiredMixin, TreinadorRequiredMixin, UpdateView):
     model = Usuario
-    fields = ['tipo', 'grupo', 'nome', 'apelido', 'data_nascimento','posicao', 'pontuacao', 'qtd_etapas_jogadas', 'is_active', 'celular', 'email'] 
+    fields = ['tipo', 'nome', 'celular', 'is_active'] 
     success_url = 'usuario_list'
     
     def get_success_url(self):

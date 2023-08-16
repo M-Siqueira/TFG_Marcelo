@@ -1,14 +1,11 @@
 from __future__ import unicode_literals
 
-from datetime import datetime
 from django.conf import settings
-from django.contrib.auth.models import AbstractBaseUser, BaseUserManager, UserManager
+from django.contrib.auth.models import AbstractBaseUser,  UserManager
 from django.db import models
 from django.db.models import Q
 from django.urls import reverse
 from django.utils.translation import ugettext_lazy as _
-
-from datetime import timedelta, datetime
 
 from utils.gerador_hash import gerar_hash
 
@@ -18,14 +15,9 @@ class AdministradorAtivoManager(UserManager):
         return super().get_queryset().filter(tipo='ADMINISTRADOR', is_active=True)
 
 
-class TreinadorAtivoManager(UserManager):
+class OrdinarioAtivoManager(UserManager):
     def get_queryset(self):
-        return super().get_queryset().filter(tipo='TREINADOR', is_active=True)
-
-
-class AtletaAtivoManager(UserManager):
-    def get_queryset(self):
-        return super().get_queryset().filter(tipo='ATLETA', is_active=True)        
+        return super().get_queryset().filter(tipo='ORDINÁRIO', is_active=True)
 
 
 class Usuario(AbstractBaseUser):
@@ -33,59 +25,30 @@ class Usuario(AbstractBaseUser):
     #2 campo da tupla eh mostrado para o usuario
     TIPOS_USUARIOS = (
         ('ADMINISTRADOR', 'Administrador'),
-        ('TREINADOR', 'Treinador' ),
-        ('ATLETA', 'Atleta' ),
+        ('ORDINÁRIO', 'Ordinário' ),
     )    
-    #1 campo da tupla fica no banco de dados
-    #2 campo da tupla eh mostrado para o usuario
-    POSICAO = (
-        ('DIREITA', 'Direita'),
-        ('ESQUERDA', 'Esquerda' ),
-        ('AMBAS', 'Ambas' ),
-    )
-
-    #1 campo da tupla fica no banco de dados
-    #2 campo da tupla eh mostrado para o usuario
-    GRUPO = (
-        ('A', 'A'),
-        ('B', 'B' ),
-        ('AMBAS','Ambas')
-    )
- 
+   
     USERNAME_FIELD = 'celular'
 
     tipo = models.CharField('Tipo do usuário *', max_length=15, choices=TIPOS_USUARIOS, default='ATLETA', help_text='* Campos obrigatórios')
-    grupo = models.CharField('Turma Longeva', max_length=5, choices=GRUPO, null=True, blank=False)
     nome = models.CharField('Nome completo *', max_length=100)
-    apelido = models.CharField('Apelido', max_length=50, null = True, blank= False, help_text='Se não tem apelido, colocar o primeiro nome')
-    data_nascimento = models.DateField('Data nascimento *', null = True, blank = False, help_text="Use dd/mm/aaaa")
-    email = models.EmailField('Email ', max_length=100, null = True, blank = False, help_text="O email é fundamental para recuperar senha")
     celular = models.CharField('Número celular com DDD', unique=True, max_length=11, db_index=True, help_text="Use DDD, por exemplo 55987619832")
-    
-    posicao = models.CharField('Posição na quadra *', max_length=8, choices=POSICAO)
-    pontuacao = models.IntegerField('Pontuação do atleta', null=True, blank=True, default=0)
-    qtd_etapas_jogadas = models.IntegerField('Quantidade de etapas que participou', null=True, blank=True, default=0)
-    
     is_active = models.BooleanField(_('Ativo'), default=False, help_text='Se ativo, o usuário tem permissão para acessar o sistema')
     slug = models.SlugField('Hash',max_length= 200,null=True,blank=True)
 
     objects = UserManager()
     administradores = AdministradorAtivoManager()
-    treinadores = TreinadorAtivoManager()
-    atletas = AtletaAtivoManager()
-    
+    ordinarios = OrdinarioAtivoManager()
+        
 
     class Meta:
-        ordering            =   ['-is_active','tipo','grupo', '-pontuacao', '-qtd_etapas_jogadas', 'apelido']
-        verbose_name        =   ('longevo')
-        verbose_name_plural =   ('longevos')
+        ordering            =   ['-is_active','tipo','nome']
+        verbose_name        =   ('usuário')
+        verbose_name_plural =   ('usuários')
 
     def __str__(self):
-        if self.apelido:
-            return '%s: %s. %s' % (self.grupo, self.apelido, self.posicao)
-        return '%s: %s. %s' % (self.grupo, self.apelido, self.posicao)
-
-
+        return '%s: %s.' % (self.tipo, self.nome)
+    
     def has_module_perms(self, app_label):
         return True
 
@@ -102,8 +65,6 @@ class Usuario(AbstractBaseUser):
         if not self.slug:
             self.slug = gerar_hash()
         self.nome = self.nome.upper()
-        if self.apelido:
-            self.apelido = self.apelido.upper()        
         if not self.id:
             self.set_password(self.password) #criptografa a senha digitada no forms
         super(Usuario, self).save(*args, **kwargs)
@@ -111,12 +72,6 @@ class Usuario(AbstractBaseUser):
     def get_id(self):
         return self.id
     
-    @property
-    def idade(self):
-        try:
-            return  datetime.now().year - self.data_nascimento.year
-        except:
-            return 0
 
     @property
     def get_primeiro_nome(self):

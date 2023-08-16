@@ -42,13 +42,13 @@ INSTALLED_APPS = [
     'bootstrap3',
     'widget_tweaks',
     
-    'appatleta',
+    #'appatleta',
 
     'usuario',
-    'etapa',
-    'inscricao',
-    'dupla',
-    'chave',
+    #'etapa',
+    #'inscricao',
+    #'dupla',
+    #'chave',
 ]
 
 MIDDLEWARE = [

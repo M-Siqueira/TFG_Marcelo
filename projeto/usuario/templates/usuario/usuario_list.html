@@ -2,7 +2,7 @@
 {% load bootstrap3 %}
 
 {% block title %}
-	{% bootstrap_icon 'user' %} Longevos
+	{% bootstrap_icon 'user' %} Usuários
 {% endblock %}
 
 {% block content %}
@@ -27,14 +27,8 @@
 	</div>
 	<table class="table table-hover">
   		<thead>
-			<th>Tipo</th>
-			<th>Turma</th>
-			<th>Apelido</th>
-  			<th>Nome</th>
-			<th class="text-center">Idade</th>
-			<th class="text-center">Posição</th>
-			<th class="text-center">Pontuação</th>
-			<th class="text-center">Etapas jogadas</th>
+			<th>Tipo</th>			
+  			<th>Nome</th>			
   			<th>Celular</th>
   			<th class="text-center">Ativo</th>
   			<th>Último acesso</th>
@@ -45,19 +39,7 @@
   			{% for usuario in object_list %}
 				<tr>
 					<td>{{ usuario.tipo }}</td>
-					<td>{{ usuario.grupo }}</td>
-					<td>
-						{% if usuario.apelido %}
-							{{ usuario.apelido }}
-						{% else %}
-							
-						{% endif %}
-					</td>
 					<td>{{ usuario.nome }}</td>
-					<td class="text-center">{{ usuario.idade }}</td>
-					<td class="text-center">{{ usuario.posicao }}</td>
-					<td class="text-center">{{ usuario.pontuacao }}</td>
-					<td class="text-center">{{ usuario.qtd_etapas_jogadas }}</td>
 					<td>{{ usuario.celular }}</td>
 					<td class="text-center">
 						{% if usuario.is_active %}
