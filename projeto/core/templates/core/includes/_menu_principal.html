@@ -19,17 +19,7 @@
         <li class=""><a href="{% url 'home' %}"> {% bootstrap_icon 'home' %} Home <span class="sr-only">(current)</span></a></li>
 
         <li class=""><a href="{% url 'usuario_list' %}">{% bootstrap_icon 'user' %} Usuários</a></li>
-        
-        <li class="dropdown">
-          <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">{% bootstrap_icon 'bed' %} Gestão Cômodos <span class="caret"></span></a>
-          <ul class="dropdown-menu">            
-            <li class=""><a href=""> Etapas (AUTOMÁTICO)</a></li>
-            <li role="separator" class="divider"></li>
-            <li class=""><a href=""> Chaves em Etapas (MANUAL)</a></li>
-            <li class=""><a href=""> Duplas em Chaves (MANUAL)</a></li>
-          </ul>
-        </li>
-        
+        <li class=""><a href="{% url 'comodo_list' %}"> {% bootstrap_icon 'bed' %} Cômodos</a></li>
         <li class=""><a href="">{% bootstrap_icon 'wrench' %} Equipamentos</a></li>        
         <li class=""><a href="">{% bootstrap_icon 'pencil' %} Perfis</a></li>
         <li class=""><a href="">{% bootstrap_icon 'cog' %} Relés</a></li>
@@ -37,7 +27,6 @@
       
       <ul class="nav navbar-nav navbar-right">
         <li><a href="{% url 'about' %}">{% bootstrap_icon 'question-sign' %} Sobre</a></li>
-        
         <li class="dropdown">
           <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Login <span class="caret"></span></a>
           <ul class="dropdown-menu">

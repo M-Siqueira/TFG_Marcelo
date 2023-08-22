@@ -42,7 +42,7 @@ INSTALLED_APPS = [
     'bootstrap3',
     'widget_tweaks',
     
-    #'appatleta',
+    'comodo',
 
     'usuario',
     #'etapa',
