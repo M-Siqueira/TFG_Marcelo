@@ -8,6 +8,7 @@ urlpatterns = [
     url(r'^admin/', admin.site.urls),
     url(r'', include('core.urls')),
     url(r'comodo/', include('comodo.urls')),
+    url(r'equipamento/', include('equipamento.urls')),
     url(r'usuario/', include('usuario.urls')),
     
     
