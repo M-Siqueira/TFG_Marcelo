@@ -41,7 +41,21 @@
   			{% for uc in object_list %}
 				<tr>
 					<td> {{ uc.usuario }}</td>
-					<td> {{ uc.comodo }}</td>
+					<td> 
+						{{ uc.comodo }}<br>
+						<small>
+							{% for c in uc.comodo.equipamentos.all %}
+							{{ c.descricao.lower }}
+							{% if forloop.last %}
+							.
+							{% else %}
+							,
+							{% endif %}
+						{% empty %}
+							<i>Nenhum equipamento informado</i>
+						{% endfor %}
+						</small>
+					</td>
 					<td> {{ uc.lugar }}</td>
 					<td class="text-center"> {{ uc.prioridade }}</td>
 					
