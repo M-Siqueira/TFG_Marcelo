@@ -20,13 +20,13 @@ class Equipamento(models.Model):
     objects = models.Manager()
 
     class Meta:
-        ordering            =   ['-is_active','descricao']
+        ordering            =   ['-is_active', 'tipo', 'descricao']
         verbose_name        =   'equipamento'
         verbose_name_plural =   'equipamentos'
 
     
     def __str__(self):
-        return '%s. Tipo: %s. Marca: %s.'  % (self.descricao, self.tipo, self.marca)
+        return '%s: %s %s'  % (self.tipo, self.descricao, self.marca)
 
     def save(self, *args, **kwargs):
         self.descricao = self.descricao.upper()

@@ -4,6 +4,7 @@ from django.urls import reverse
 
 class Comodo(models.Model):
     descricao = models.CharField('Descrição do cômodo', max_length=50, help_text="Quarto do pai ou Sala de estar.")
+    equipamentos = models.ManyToManyField('equipamento.Equipamento', verbose_name='Equipamento(s)', null=True, blank=True, related_name='equipamentos', help_text='Para selecionar ou deselecionar um equipamento pressione CTRL + Botão Esquerdo do mouse ou Command + Botão Esquerdo do mouse')
     is_active = models.BooleanField('Ativo', default=True)
     slug = models.SlugField('Hash',max_length= 200,null=True,blank=True)
     
