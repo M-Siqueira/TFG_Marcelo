@@ -42,12 +42,12 @@ class Usuario(AbstractBaseUser):
         
 
     class Meta:
-        ordering            =   ['-is_active','tipo','nome']
+        ordering            =   ['-is_active','tipo','nome']        
         verbose_name        =   ('usuário')
         verbose_name_plural =   ('usuários')
 
     def __str__(self):
-        return '%s: %s.' % (self.tipo, self.nome)
+        return '%s' % (self.nome)
     
     def has_module_perms(self, app_label):
         return True

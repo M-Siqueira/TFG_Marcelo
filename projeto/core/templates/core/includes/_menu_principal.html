@@ -20,9 +20,15 @@
 
         <li class=""><a href="{% url 'usuario_list' %}">{% bootstrap_icon 'user' %} Usuários</a></li>
         <li class=""><a href="{% url 'comodo_list' %}"> {% bootstrap_icon 'bed' %} Cômodos</a></li>
-        <li class=""><a href="{% url 'equipamento_list' %}">{% bootstrap_icon 'wrench' %} Equipamentos</a></li>        
-        <li class=""><a href="">{% bootstrap_icon 'pencil' %} Perfis</a></li>
+        <li class=""><a href="{% url 'equipamento_list' %}">{% bootstrap_icon 'wrench' %} Equipamentos</a></li> 
         <li class=""><a href="">{% bootstrap_icon 'cog' %} Relés</a></li>
+        
+        <li class="dropdown">
+          <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">{% bootstrap_icon 'pencil' %} Perfis <span class="caret"></span></a>
+          <ul class="dropdown-menu">            
+            <li class=""><a href="{% url 'usuariocomodo_list' %}"> Associar Usuário à Cômodo</a></li>
+          </ul>
+        </li>
       </ul>
       
       <ul class="nav navbar-nav navbar-right">

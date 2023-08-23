@@ -44,6 +44,7 @@ INSTALLED_APPS = [
     
     'comodo',
     'equipamento',
+    'usuariocomodo',
 
     'usuario',
     #'etapa',
