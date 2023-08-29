@@ -49,7 +49,7 @@ class ComodoListView(LoginRequiredMixin, StaffRequiredMixin, ListView):
 
 class ComodoCreateView(LoginRequiredMixin, StaffRequiredMixin, CreateView):
     model = Comodo
-    fields = ['descricao', 'equipamentos', 'is_active']
+    fields = ['descricao', 'lugar', 'cidade', 'equipamentos', 'is_active']
     success_url = 'comodo_list'
     
     def get_success_url(self):
@@ -58,7 +58,7 @@ class ComodoCreateView(LoginRequiredMixin, StaffRequiredMixin, CreateView):
 
 class ComodoUpdateView(LoginRequiredMixin, StaffRequiredMixin, UpdateView):
     model = Comodo
-    fields = ['descricao', 'equipamentos', 'is_active']
+    fields = ['descricao', 'lugar', 'cidade', 'equipamentos', 'is_active']
     success_url = 'comodo_list'
     
     def get_success_url(self):

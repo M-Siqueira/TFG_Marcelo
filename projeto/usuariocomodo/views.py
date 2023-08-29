@@ -49,7 +49,7 @@ class UsuarioComodoListView(LoginRequiredMixin, StaffRequiredMixin, ListView):
 
 class UsuarioComodoCreateView(LoginRequiredMixin, StaffRequiredMixin, CreateView):
     model = UsuarioComodo
-    fields = ['usuario', 'comodo', 'lugar', 'cidade', 'prioridade', 'is_active']
+    fields = ['usuario', 'comodo', 'prioridade', 'is_active']
     success_url = 'usuariocomodo_list'
     
     def get_success_url(self):
@@ -58,7 +58,7 @@ class UsuarioComodoCreateView(LoginRequiredMixin, StaffRequiredMixin, CreateView
 
 class UsuarioComodoUpdateView(LoginRequiredMixin, StaffRequiredMixin, UpdateView):
     model = UsuarioComodo
-    fields = ['usuario', 'comodo', 'lugar', 'cidade', 'prioridade', 'is_active']
+    fields = ['usuario', 'comodo',  'prioridade', 'is_active']
     success_url = 'usuariocomodo_list'
     
     def get_success_url(self):

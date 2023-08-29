@@ -29,6 +29,7 @@
 	<table class="table table-hover">
   		<thead>			
 			<th>Descrição</th>
+			<th>Localização</th>
 			<th>Equipamentos</th>
 			<th class="text-center">Ativo</th>  			
 			<th class="text-center">Editar</th>  			
@@ -39,6 +40,7 @@
   			{% for comodo in object_list %}
 				<tr>
 					<td> {{ comodo.descricao }}</td>
+					<td> {{ comodo.lugar }} <br> <small>{{ comodo.cidade }}</small></td>
 					<td>
 						{% for c in comodo.equipamentos.all %}
 							{{ c.descricao }}
