@@ -8,10 +8,22 @@ class UsuarioComodo(models.Model):
     PRIORIDADE = (
         ('SIM', 'Sim'),
         ('NÃO', 'Não' ),
+    )  
+    
+    #1 campo da tupla fica no banco de dados
+    #2 campo da tupla eh mostrado para o usuario
+    LUGAR = (
+        ('APARTAMENTO', 'Apartamento'),
+        ('CASA', 'Casa'),
+        ('CONSULTÓRIO', 'Consultório' ),
+        ('ESCRITÓRIO', 'Escritório' ),
+        ('SÍTIO', 'Sítio' ),
+        ('OUTRO', 'Outro' ),
     )   
     usuario = models.ForeignKey('usuario.Usuario', verbose_name= 'Usuário ou pessoa para cômodo *', on_delete=models.PROTECT, related_name='usuario')
     comodo = models.ForeignKey('comodo.Comodo', verbose_name= 'Cômodo associado a este usuário *', on_delete=models.PROTECT, related_name='comodo')
-    lugar = models.CharField('Localização deste cômodo *', max_length=30, null=True, blank=False,  help_text='Por exemplo, Casa da Praia ou Escritório ou Apartamento na Praia')
+    lugar = models.CharField('Localização deste cômodo *', max_length=12, choices=LUGAR, null=True, blank=False)
+    cidade = models.CharField('Cidade *', max_length=30, null=True, blank=False)
     prioridade = models.CharField('Usuário tem prioridade neste cômodo *', max_length=3, choices=PRIORIDADE, help_text='* Campos obrigatórios')
     is_active = models.BooleanField('Ativo', default=True)
     slug = models.SlugField('Hash',max_length= 200,null=True,blank=True)
@@ -20,7 +32,7 @@ class UsuarioComodo(models.Model):
 
     class Meta:
         ordering            =   ['-is_active','usuario', 'comodo']
-        unique_together     =  [['usuario', 'comodo', 'lugar']]
+        unique_together     =  [['usuario', 'comodo', 'lugar', 'cidade']]
         verbose_name        =   'UsuarioComodo'
         verbose_name_plural =   'UsuarioComodos' 
 
