@@ -49,7 +49,11 @@ class UsuarioComodoListView(LoginRequiredMixin, StaffRequiredMixin, ListView):
 
 class UsuarioComodoCreateView(LoginRequiredMixin, StaffRequiredMixin, CreateView):
     model = UsuarioComodo
-    fields = ['usuario', 'comodo', 'prioridade', 'is_active']
+    fields = ['usuario', 'comodo', 'prioridade', 'is_active',  
+    'verao_iluminacao_manha', 'verao_iluminacao_tarde','verao_iluminacao_noite',
+    'inverno_iluminacao_manha','inverno_iluminacao_tarde','inverno_iluminacao_noite',
+    'primavera_iluminacao_manha','primavera_iluminacao_tarde','primavera_iluminacao_noite',
+    'outono_iluminacao_manha','outono_iluminacao_tarde','outono_iluminacao_noite']
     success_url = 'usuariocomodo_list'
     
     def get_success_url(self):
@@ -58,7 +62,11 @@ class UsuarioComodoCreateView(LoginRequiredMixin, StaffRequiredMixin, CreateView
 
 class UsuarioComodoUpdateView(LoginRequiredMixin, StaffRequiredMixin, UpdateView):
     model = UsuarioComodo
-    fields = ['usuario', 'comodo',  'prioridade', 'is_active']
+    fields = ['usuario', 'comodo', 'prioridade', 'is_active',  
+    'verao_iluminacao_manha', 'verao_iluminacao_tarde','verao_iluminacao_noite',
+    'inverno_iluminacao_manha','inverno_iluminacao_tarde','inverno_iluminacao_noite',
+    'primavera_iluminacao_manha','primavera_iluminacao_tarde','primavera_iluminacao_noite',
+    'outono_iluminacao_manha','outono_iluminacao_tarde','outono_iluminacao_noite']
     success_url = 'usuariocomodo_list'
     
     def get_success_url(self):

@@ -16,7 +16,109 @@
       {% bootstrap_alert error 'danger' %}
     {% endfor %}
     
-    {% bootstrap_form form %}
+    <!-- {% bootstrap_form form %} -->
+
+    <div class="panel panel-default">
+      <div class="panel-body">
+        <h2>Usuário vs Cômodo</h2>
+      </div>
+    </div>
+
+    
+
+    <div class="table-responsive">
+      <table class="table table-hover">
+        <tr>
+          <td>
+            {{ form.usuario.label }}
+          </td>
+          <td>
+            {{ form.usuario }}
+          </td>
+        </tr>
+        <tr>
+          <td>
+            {{ form.comodo.label }}
+          </td>
+          <td>
+            {{ form.comodo }}
+          </td>
+        </tr>
+      </table>
+    </div>
+
+    <div class="panel panel-default">
+      <div class="panel-body">
+        <h2>Iluminação</h2>
+      </div>
+    </div>
+
+    <div class="table-responsive">
+      <table class="table table-hover">
+        <tr>
+          <td>
+            <h3>Primavera</h3>
+          </td>
+          <td>
+            <h3>Verão</h3>
+          </td>
+          <td>
+            <h3>Outono</h3>
+          </td>
+          <td>
+            <h3>Inverno</h3>
+          </td>
+        </tr>
+        
+        <tr>
+          <td>
+            {{ form.primavera_iluminacao_manha.label }}
+            {{ form.primavera_iluminacao_manha }}        
+            <br><br>
+            {{ form.primavera_iluminacao_tarde.label }}
+            {{ form.primavera_iluminacao_tarde }}            
+            <br><br>
+            {{ form.primavera_iluminacao_noite.label }}
+            {{ form.primavera_iluminacao_noite }}            
+          </td> 
+          
+          <td>
+            {{ form.verao_iluminacao_manha.label }}
+            {{ form.verao_iluminacao_manha }}        
+            <br><br>
+            {{ form.verao_iluminacao_tarde.label }}
+            {{ form.verao_iluminacao_tarde }}            
+            <br><br>
+            {{ form.verao_iluminacao_noite.label }}
+            {{ form.verao_iluminacao_noite }}            
+          </td>
+
+          <td>
+            {{ form.outono_iluminacao_manha.label }}
+            {{ form.outono_iluminacao_manha }}        
+            <br><br>
+            {{ form.outono_iluminacao_tarde.label }}
+            {{ form.outono_iluminacao_tarde }}            
+            <br><br>
+            {{ form.outono_iluminacao_noite.label }}
+            {{ form.outono_iluminacao_noite }}            
+          </td>
+
+          <td>
+            {{ form.inverno_iluminacao_manha.label }}
+            {{ form.inverno_iluminacao_manha }}        
+            <br><br>
+            {{ form.inverno_iluminacao_tarde.label }}
+            {{ form.inverno_iluminacao_tarde }}            
+            <br><br>
+            {{ form.inverno_iluminacao_noite.label }}
+            {{ form.inverno_iluminacao_noite }}            
+          </td>
+        </tr>
+
+      </table>
+    </div>
+    
 
     {% buttons submit='Gravar' %}
        <a href="javascript:history.go(-1);" class="btn btn-info" role="button">Voltar</a>
