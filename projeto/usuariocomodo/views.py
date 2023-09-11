@@ -53,7 +53,11 @@ class UsuarioComodoCreateView(LoginRequiredMixin, StaffRequiredMixin, CreateView
     'verao_iluminacao_manha', 'verao_iluminacao_tarde','verao_iluminacao_noite',
     'inverno_iluminacao_manha','inverno_iluminacao_tarde','inverno_iluminacao_noite',
     'primavera_iluminacao_manha','primavera_iluminacao_tarde','primavera_iluminacao_noite',
-    'outono_iluminacao_manha','outono_iluminacao_tarde','outono_iluminacao_noite']
+    'outono_iluminacao_manha','outono_iluminacao_tarde','outono_iluminacao_noite',
+    'verao_climatizacao_manha', 'verao_climatizacao_tarde','verao_climatizacao_noite',
+    'inverno_climatizacao_manha','inverno_climatizacao_tarde','inverno_climatizacao_noite',
+    'primavera_climatizacao_manha','primavera_climatizacao_tarde','primavera_climatizacao_noite',
+    'outono_climatizacao_manha','outono_climatizacao_tarde','outono_climatizacao_noite']
     success_url = 'usuariocomodo_list'
     
     def get_success_url(self):
@@ -66,7 +70,11 @@ class UsuarioComodoUpdateView(LoginRequiredMixin, StaffRequiredMixin, UpdateView
     'verao_iluminacao_manha', 'verao_iluminacao_tarde','verao_iluminacao_noite',
     'inverno_iluminacao_manha','inverno_iluminacao_tarde','inverno_iluminacao_noite',
     'primavera_iluminacao_manha','primavera_iluminacao_tarde','primavera_iluminacao_noite',
-    'outono_iluminacao_manha','outono_iluminacao_tarde','outono_iluminacao_noite']
+    'outono_iluminacao_manha','outono_iluminacao_tarde','outono_iluminacao_noite',
+    'verao_climatizacao_manha', 'verao_climatizacao_tarde','verao_climatizacao_noite',
+    'inverno_climatizacao_manha','inverno_climatizacao_tarde','inverno_climatizacao_noite',
+    'primavera_climatizacao_manha','primavera_climatizacao_tarde','primavera_climatizacao_noite',
+    'outono_climatizacao_manha','outono_climatizacao_tarde','outono_climatizacao_noite']
     success_url = 'usuariocomodo_list'
     
     def get_success_url(self):
