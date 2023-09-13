@@ -44,6 +44,7 @@ INSTALLED_APPS = [
     'aviso',
     'comodo',
     'equipamento',
+    'rele',
     'usuariocomodo',
 
     'usuario',
