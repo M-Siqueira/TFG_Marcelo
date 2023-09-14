@@ -49,7 +49,7 @@ class EquipamentoListView(LoginRequiredMixin, StaffRequiredMixin, ListView):
 
 class EquipamentoCreateView(LoginRequiredMixin, StaffRequiredMixin, CreateView):
     model = Equipamento
-    fields = ['descricao','marca', 'modelo', 'tipo', 'observacao', 'is_active']
+    fields = ['descricao','marca', 'modelo', 'tipo', 'rele', 'observacao', 'is_active']
     success_url = 'equipamento_list'
     
     def get_success_url(self):
@@ -58,7 +58,7 @@ class EquipamentoCreateView(LoginRequiredMixin, StaffRequiredMixin, CreateView):
 
 class EquipamentoUpdateView(LoginRequiredMixin, StaffRequiredMixin, UpdateView):
     model = Equipamento
-    fields = ['descricao','marca', 'modelo', 'tipo', 'observacao', 'is_active']
+    fields = ['descricao','marca', 'modelo', 'tipo', 'rele', 'observacao', 'is_active']
     success_url = 'equipamento_list'
     
     def get_success_url(self):

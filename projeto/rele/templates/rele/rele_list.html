@@ -41,7 +41,12 @@
 				<tr>
 					<td> {{ rele.descricao }}</td>
 					<td> {{ rele.marca }}</td>
-					<td> {{ rele.modelo }}</td>
+					<td> 
+						{% if rele.modelo %}
+							{{ rele.modelo }}
+						{% endif %}
+
+					</td>
 					<td class="text-center">
 						{% if rele.is_active %}
 							{% bootstrap_icon 'thumbs-up' size='sm' %}

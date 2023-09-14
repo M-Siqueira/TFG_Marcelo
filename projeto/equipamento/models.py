@@ -1,6 +1,6 @@
 from django.db import models
 from django.urls import reverse
-
+from rele.models import Rele
 
 class Equipamento(models.Model):
     #1 campo da tupla fica no banco de dados
@@ -14,6 +14,9 @@ class Equipamento(models.Model):
     modelo = models.CharField('Modelo', max_length=30, null=True, blank=True, )
     tipo = models.CharField('Tipo do equipamento *', max_length=15, choices=TIPO, help_text='* Campos obrigatórios')
     observacao = models.CharField('Alguma observação ou detalhe do equipamento', null=True, blank=True, max_length=100)
+    
+    rele = models.ForeignKey('rele.Rele', verbose_name= 'Relé associado ao equipamento', null=True, blank=True, on_delete=models.PROTECT, related_name='rele')
+    
     is_active = models.BooleanField('Ativo', default=True)
     slug = models.SlugField('Hash',max_length= 200,null=True,blank=True)
     

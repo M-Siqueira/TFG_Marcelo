@@ -24,9 +24,12 @@ class Rele(models.Model):
         return '%s: %s'  % (self.marca, self.descricao)
 
     def save(self, *args, **kwargs):
-        self.descricao = self.descricao.upper()
-        self.marca = self.marca.upper()
-        self.modelo = self.modelo.upper()
+        if self.descricao:
+            self.descricao = self.descricao.upper()
+        if self.marca:
+            self.marca = self.marca.upper()
+        if self.modelo:
+            self.modelo = self.modelo.upper()
         super(Rele, self).save(*args, **kwargs)
          
     @property

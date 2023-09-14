@@ -32,6 +32,7 @@
 			<th>Descrição</th>
 			<th>Marca</th>
 			<th>Modelo</th>
+			<th>Relé</th>
 			<th class="text-center">Ativo</th>  			
 			<th class="text-center">Editar</th>  			
   			<th class="text-center">Excluir</th>
@@ -44,6 +45,13 @@
 					<td> {{ equipamento.descricao }}</td>
 					<td> {{ equipamento.marca }}</td>
 					<td> {{ equipamento.modelo }}</td>
+					<td> 
+						{% if equipamento.rele %}
+							{{ equipamento.rele }}
+						{% else %}
+							{% bootstrap_icon 'thumbs-down' size='sm' %}
+						{% endif %}
+					</td>
 					<td class="text-center">
 						{% if equipamento.is_active %}
 							{% bootstrap_icon 'thumbs-up' size='sm' %}
