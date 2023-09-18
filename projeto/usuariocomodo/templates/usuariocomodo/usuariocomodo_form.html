@@ -64,31 +64,50 @@
           <td>
             <h3>Inverno</h3>
           </td>
-        </tr>
-        
+        </tr>                
+
         <tr>
           <td>
-            {% bootstrap_field form.primavera_iluminacao_manha %}
-            {% bootstrap_field form.primavera_iluminacao_tarde %}
-            {% bootstrap_field form.primavera_iluminacao_noite %}
+            {% bootstrap_field form.primavera_iluminacao_manha %}            
           </td> 
-          
           <td>
             {% bootstrap_field form.verao_iluminacao_manha %}
+          </td>
+          <td>
+            {% bootstrap_field form.outono_iluminacao_manha %}            
+          </td>
+          <td>
+            {% bootstrap_field form.inverno_iluminacao_manha %}                 
+          </td>
+        </tr>
+
+        <tr>
+          <td>
+            {% bootstrap_field form.primavera_iluminacao_tarde %}            
+          </td> 
+          <td>
             {% bootstrap_field form.verao_iluminacao_tarde %}
+          </td>
+          <td>
+            {% bootstrap_field form.outono_iluminacao_tarde %}            
+          </td>
+          <td>
+            {% bootstrap_field form.inverno_iluminacao_tarde %}                 
+          </td>
+        </tr>
+
+        <tr>
+          <td>
+            {% bootstrap_field form.primavera_iluminacao_noite %}            
+          </td> 
+          <td>
             {% bootstrap_field form.verao_iluminacao_noite %}
           </td>
-
           <td>
-            {% bootstrap_field form.outono_iluminacao_manha %}
-            {% bootstrap_field form.outono_iluminacao_tarde %}
-            {% bootstrap_field form.outono_iluminacao_noite %}
+            {% bootstrap_field form.outono_iluminacao_noite %}            
           </td>
-
           <td>
-            {% bootstrap_field form.inverno_iluminacao_manha %}
-            {% bootstrap_field form.inverno_iluminacao_tarde %}
-            {% bootstrap_field form.inverno_iluminacao_noite %}     
+            {% bootstrap_field form.inverno_iluminacao_noite %}                 
           </td>
         </tr>
 
@@ -120,30 +139,48 @@
         
         <tr>
           <td>
-            {% bootstrap_field form.primavera_climatizacao_manha %}
-            {% bootstrap_field form.primavera_climatizacao_tarde %}
-            {% bootstrap_field form.primavera_climatizacao_noite %}
+            {% bootstrap_field form.primavera_climatizacao_manha %}            
           </td> 
-          
           <td>
             {% bootstrap_field form.verao_climatizacao_manha %}
-            {% bootstrap_field form.verao_climatizacao_tarde %}
-            {% bootstrap_field form.verao_climatizacao_noite %}
           </td>
-
           <td>
-            {% bootstrap_field form.outono_climatizacao_manha %}
-            {% bootstrap_field form.outono_climatizacao_tarde %}
-            {% bootstrap_field form.outono_climatizacao_noite %}
+            {% bootstrap_field form.outono_climatizacao_manha %}            
           </td>
-
           <td>
-            {% bootstrap_field form.inverno_climatizacao_manha %}
-            {% bootstrap_field form.inverno_climatizacao_tarde %}
-            {% bootstrap_field form.inverno_climatizacao_noite %}     
+            {% bootstrap_field form.inverno_climatizacao_manha %}                 
           </td>
         </tr>
 
+        <tr>
+          <td>
+            {% bootstrap_field form.primavera_climatizacao_tarde %}            
+          </td> 
+          <td>
+            {% bootstrap_field form.verao_climatizacao_tarde %}
+          </td>
+          <td>
+            {% bootstrap_field form.outono_climatizacao_tarde %}            
+          </td>
+          <td>
+            {% bootstrap_field form.inverno_climatizacao_tarde %}                 
+          </td>
+        </tr>
+
+        <tr>
+          <td>
+            {% bootstrap_field form.primavera_climatizacao_noite %}            
+          </td> 
+          <td>
+            {% bootstrap_field form.verao_climatizacao_noite %}
+          </td>
+          <td>
+            {% bootstrap_field form.outono_climatizacao_noite %}            
+          </td>
+          <td>
+            {% bootstrap_field form.inverno_climatizacao_noite %}                 
+          </td>
+        </tr>
       </table>
     </div>
     
