@@ -79,6 +79,11 @@ class Usuario(AbstractBaseUser):
         return lista[0]
 
     @property
+    def get_sobrenome(self):
+        lista = self.nome.split(" ")
+        return lista[-1]
+
+    @property
     def is_staff(self):
         if self.tipo == 'ADMINISTRADOR':
             return True

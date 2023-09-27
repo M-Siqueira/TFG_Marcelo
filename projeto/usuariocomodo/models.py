@@ -14,7 +14,7 @@ class UsuarioComodo(models.Model):
     #2 campo da tupla eh mostrado para o usuario
     ESTAGIO = (
         ('FORTE', 'Forte'),
-        ('MÉDIA', 'Médio' ),
+        ('MEDIA', 'Média' ),
         ('FRACA', 'Fraco' ),
         ('DESLIGADA', 'Desligada' ),
     )  
@@ -23,7 +23,7 @@ class UsuarioComodo(models.Model):
     #2 campo da tupla eh mostrado para o usuario
     CLIMATIZACAO = (
         ('ALTA', 'Alta'),
-        ('MÉDIA', 'Média' ),
+        ('MEDIA', 'Média' ),
         ('BAIXA', 'Baixa' ),
         ('DESLIGADA', 'Desligada' ),
     )  
@@ -31,32 +31,33 @@ class UsuarioComodo(models.Model):
     usuario = models.ForeignKey('usuario.Usuario', verbose_name= 'Usuário ou pessoa para cômodo *', on_delete=models.PROTECT, related_name='usuario')
     comodo = models.ForeignKey('comodo.Comodo', verbose_name= 'Cômodo associado a este usuário *', on_delete=models.PROTECT, related_name='comodo')
     prioridade = models.CharField('Usuário tem prioridade neste cômodo *', max_length=3, choices=PRIORIDADE, help_text='* Campos obrigatórios')
+    crenca_webservice = models.TextField('Base de crença convertida do banco para AgentSpeak(L) e Jason', max_length=1000, null=True, blank=True)
         
-    verao_iluminacao_manha = models.CharField('Manhã: ', max_length=10, choices=ESTAGIO, null=True, blank=True, help_text='Itensidade da iluminação')
-    verao_iluminacao_tarde = models.CharField('Tarde', max_length=10, choices=ESTAGIO, null=True, blank=True, help_text='Itensidade da iluminação')
-    verao_iluminacao_noite = models.CharField('Noite', max_length=10, choices=ESTAGIO, null=True, blank=True, help_text='Itensidade da iluminação')
-    inverno_iluminacao_manha = models.CharField('Manhã', max_length=10, choices=ESTAGIO, null=True, blank=True, help_text='Itensidade da iluminação')
-    inverno_iluminacao_tarde = models.CharField('Tarde', max_length=10, choices=ESTAGIO, null=True, blank=True, help_text='Itensidade da iluminação')
-    inverno_iluminacao_noite = models.CharField('Noite', max_length=10, choices=ESTAGIO, null=True, blank=True, help_text='Itensidade da iluminação')
-    primavera_iluminacao_manha = models.CharField('Manhã', max_length=10, choices=ESTAGIO, null=True, blank=True, help_text='Itensidade da iluminação')
-    primavera_iluminacao_tarde = models.CharField('Tarde', max_length=10, choices=ESTAGIO, null=True, blank=True, help_text='Itensidade da iluminação')
-    primavera_iluminacao_noite = models.CharField('Noite', max_length=10, choices=ESTAGIO, null=True, blank=True, help_text='Itensidade da iluminação')
-    outono_iluminacao_manha = models.CharField('Manhã', max_length=10, choices=ESTAGIO, null=True, blank=True, help_text='Itensidade da iluminação')
-    outono_iluminacao_tarde = models.CharField('Tarde', max_length=10, choices=ESTAGIO, null=True, blank=True, help_text='Itensidade da iluminação')
-    outono_iluminacao_noite = models.CharField('Noite', max_length=10, choices=ESTAGIO, null=True, blank=True, help_text='Itensidade da iluminação')
+    verao_iluminacao_manha = models.CharField('Manhã: ', max_length=10, choices=ESTAGIO, default='DESLIGADA', null=True, blank=True, help_text='Itensidade da iluminação')
+    verao_iluminacao_tarde = models.CharField('Tarde', max_length=10, choices=ESTAGIO, default='DESLIGADA', null=True, blank=True, help_text='Itensidade da iluminação')
+    verao_iluminacao_noite = models.CharField('Noite', max_length=10, choices=ESTAGIO, default='DESLIGADA', null=True, blank=True, help_text='Itensidade da iluminação')
+    inverno_iluminacao_manha = models.CharField('Manhã', max_length=10, choices=ESTAGIO, default='DESLIGADA', null=True, blank=True, help_text='Itensidade da iluminação')
+    inverno_iluminacao_tarde = models.CharField('Tarde', max_length=10, choices=ESTAGIO, default='DESLIGADA', null=True, blank=True, help_text='Itensidade da iluminação')
+    inverno_iluminacao_noite = models.CharField('Noite', max_length=10, choices=ESTAGIO, default='DESLIGADA', null=True, blank=True, help_text='Itensidade da iluminação')
+    primavera_iluminacao_manha = models.CharField('Manhã', max_length=10, choices=ESTAGIO, default='DESLIGADA', null=True, blank=True, help_text='Itensidade da iluminação')
+    primavera_iluminacao_tarde = models.CharField('Tarde', max_length=10, choices=ESTAGIO, default='DESLIGADA', null=True, blank=True, help_text='Itensidade da iluminação')
+    primavera_iluminacao_noite = models.CharField('Noite', max_length=10, choices=ESTAGIO, default='DESLIGADA', null=True, blank=True, help_text='Itensidade da iluminação')
+    outono_iluminacao_manha = models.CharField('Manhã', max_length=10, choices=ESTAGIO, default='DESLIGADA', null=True, blank=True, help_text='Itensidade da iluminação')
+    outono_iluminacao_tarde = models.CharField('Tarde', max_length=10, choices=ESTAGIO, default='DESLIGADA', null=True, blank=True, help_text='Itensidade da iluminação')
+    outono_iluminacao_noite = models.CharField('Noite', max_length=10, choices=ESTAGIO, default='DESLIGADA', null=True, blank=True, help_text='Itensidade da iluminação')
 
-    verao_climatizacao_manha = models.CharField('Manhã: ', max_length=10, choices=CLIMATIZACAO, default="MÉDIA", null=True, blank=True, help_text='Baixa: menos de 20 graus; Alta: acima de 24 graus')
-    verao_climatizacao_tarde = models.CharField('Tarde', max_length=10, choices=CLIMATIZACAO, default="MÉDIA", null=True, blank=True, help_text='Baixa: menos de 20 graus; Alta: acima de 24 graus')
-    verao_climatizacao_noite = models.CharField('Noite', max_length=10, choices=CLIMATIZACAO, default="MÉDIA", null=True, blank=True, help_text='Baixa: menos de 20 graus; Alta: acima de 24 graus')
-    inverno_climatizacao_manha = models.CharField('Manhã', max_length=10, choices=CLIMATIZACAO, default="MÉDIA", null=True, blank=True, help_text='Baixa: menos de 20 graus; Alta: acima de 24 graus')
-    inverno_climatizacao_tarde = models.CharField('Tarde', max_length=10, choices=CLIMATIZACAO, default="MÉDIA", null=True, blank=True, help_text='Baixa: menos de 20 graus; Alta: acima de 24 graus')
-    inverno_climatizacao_noite = models.CharField('Noite', max_length=10, choices=CLIMATIZACAO, default="MÉDIA", null=True, blank=True, help_text='Baixa: menos de 20 graus; Alta: acima de 24 graus')
-    primavera_climatizacao_manha = models.CharField('Manhã', max_length=10, choices=CLIMATIZACAO, default="MÉDIA", null=True, blank=True, help_text='Baixa: menos de 20 graus; Alta: acima de 24 graus')
-    primavera_climatizacao_tarde = models.CharField('Tarde', max_length=10, choices=CLIMATIZACAO, default="MÉDIA", null=True, blank=True, help_text='Baixa: menos de 20 graus; Alta: acima de 24 graus')
-    primavera_climatizacao_noite = models.CharField('Noite', max_length=10, choices=CLIMATIZACAO, default="MÉDIA", null=True, blank=True, help_text='Baixa: menos de 20 graus; Alta: acima de 24 graus')
-    outono_climatizacao_manha = models.CharField('Manhã', max_length=10, choices=CLIMATIZACAO, default="MÉDIA", null=True, blank=True, help_text='Baixa: menos de 20 graus; Alta: acima de 24 graus')
-    outono_climatizacao_tarde = models.CharField('Tarde', max_length=10, choices=CLIMATIZACAO, default="MÉDIA", null=True, blank=True, help_text='Baixa: menos de 20 graus; Alta: acima de 24 graus')
-    outono_climatizacao_noite = models.CharField('Noite', max_length=10, choices=CLIMATIZACAO, default="MÉDIA", null=True, blank=True, help_text='Baixa: menos de 20 graus; Alta: acima de 24 graus')
+    verao_climatizacao_manha = models.CharField('Manhã: ', max_length=10, choices=CLIMATIZACAO, default="MEDIA", null=True, blank=True, help_text='Baixa: menos de 20 graus; Alta: acima de 24 graus')
+    verao_climatizacao_tarde = models.CharField('Tarde', max_length=10, choices=CLIMATIZACAO, default="MEDIA", null=True, blank=True, help_text='Baixa: menos de 20 graus; Alta: acima de 24 graus')
+    verao_climatizacao_noite = models.CharField('Noite', max_length=10, choices=CLIMATIZACAO, default="MEDIA", null=True, blank=True, help_text='Baixa: menos de 20 graus; Alta: acima de 24 graus')
+    inverno_climatizacao_manha = models.CharField('Manhã', max_length=10, choices=CLIMATIZACAO, default="MEDIA", null=True, blank=True, help_text='Baixa: menos de 20 graus; Alta: acima de 24 graus')
+    inverno_climatizacao_tarde = models.CharField('Tarde', max_length=10, choices=CLIMATIZACAO, default="MEDIA", null=True, blank=True, help_text='Baixa: menos de 20 graus; Alta: acima de 24 graus')
+    inverno_climatizacao_noite = models.CharField('Noite', max_length=10, choices=CLIMATIZACAO, default="MEDIA", null=True, blank=True, help_text='Baixa: menos de 20 graus; Alta: acima de 24 graus')
+    primavera_climatizacao_manha = models.CharField('Manhã', max_length=10, choices=CLIMATIZACAO, default="MEDIA", null=True, blank=True, help_text='Baixa: menos de 20 graus; Alta: acima de 24 graus')
+    primavera_climatizacao_tarde = models.CharField('Tarde', max_length=10, choices=CLIMATIZACAO, default="MEDIA", null=True, blank=True, help_text='Baixa: menos de 20 graus; Alta: acima de 24 graus')
+    primavera_climatizacao_noite = models.CharField('Noite', max_length=10, choices=CLIMATIZACAO, default="MEDIA", null=True, blank=True, help_text='Baixa: menos de 20 graus; Alta: acima de 24 graus')
+    outono_climatizacao_manha = models.CharField('Manhã', max_length=10, choices=CLIMATIZACAO, default="MEDIA", null=True, blank=True, help_text='Baixa: menos de 20 graus; Alta: acima de 24 graus')
+    outono_climatizacao_tarde = models.CharField('Tarde', max_length=10, choices=CLIMATIZACAO, default="MEDIA", null=True, blank=True, help_text='Baixa: menos de 20 graus; Alta: acima de 24 graus')
+    outono_climatizacao_noite = models.CharField('Noite', max_length=10, choices=CLIMATIZACAO, default="MEDIA", null=True, blank=True, help_text='Baixa: menos de 20 graus; Alta: acima de 24 graus')
                                                
     is_active = models.BooleanField('Ativo', default=True)
     slug = models.SlugField('Hash',max_length= 200,null=True,blank=True)
@@ -73,7 +74,68 @@ class UsuarioComodo(models.Model):
     def __str__(self):
         return '%s - %s' % (self.usuario.nome, self.comodo.descricao)
 
-    def save(self, *args, **kwargs):        
+    def gerar_crenca_webservice(self):
+        vetor_cidade = self.comodo.cidade.lower().split(" ")
+        if len(vetor_cidade) > 1:
+            cidade = vetor_cidade[0] + "_" + vetor_cidade[-1]
+        else:
+            cidade = vetor_cidade[0]
+
+        vetor_lugar = self.comodo.lugar.lower().split(" ")
+        if len(vetor_lugar) > 1:
+            lugar = vetor_lugar[0] + "_" + vetor_lugar[-1]
+        else:
+            lugar = vetor_lugar[0]
+
+        vetor_descricao = self.comodo.descricao.lower().split(" ")
+        if len(vetor_descricao) > 1:
+            descricao = vetor_descricao[0] + "_" + vetor_descricao[-1]
+        else:
+            descricao = vetor_descricao[0]
+
+        usuario = str(self.usuario.get_primeiro_nome.lower()) + '_' + str(self.usuario.get_sobrenome.lower())
+
+        crenca = ''
+        #iluminacao nas 4 estacoes
+        crenca += 'iluminacao_' + cidade + '_' + lugar + '_' + descricao + '(' + usuario + ',primavera,manha,'+self.primavera_iluminacao_manha.lower() + ').\n'
+        crenca += 'iluminacao_' + cidade + '_' + lugar + '_' + descricao + '(' + usuario + ',primavera,tarde,'+self.primavera_iluminacao_tarde.lower() + ').\n'
+        crenca += 'iluminacao_' + cidade + '_' + lugar + '_' + descricao + '(' + usuario + ',primavera,noite,'+self.primavera_iluminacao_noite.lower() + ').\n'
+
+        crenca += 'iluminacao_' + cidade + '_' + lugar + '_' + descricao + '(' + usuario + ',verao,manha,'+self.verao_iluminacao_manha.lower() + ').\n'
+        crenca += 'iluminacao_' + cidade + '_' + lugar + '_' + descricao + '(' + usuario + ',verao,tarde,'+self.verao_iluminacao_tarde.lower() + ').\n'
+        crenca += 'iluminacao_' + cidade + '_' + lugar + '_' + descricao + '(' + usuario + ',verao,noite,'+self.verao_iluminacao_noite.lower() + ').\n'
+        
+        crenca += 'iluminacao_' + cidade + '_' + lugar + '_' + descricao + '(' + usuario + ',outono,manha,'+self.outono_iluminacao_manha.lower() + ').\n'
+        crenca += 'iluminacao_' + cidade + '_' + lugar + '_' + descricao + '(' + usuario + ',outono,tarde,'+self.outono_iluminacao_tarde.lower() + ').\n'
+        crenca += 'iluminacao_' + cidade + '_' + lugar + '_' + descricao + '(' + usuario + ',outono,noite,'+self.outono_iluminacao_noite.lower() + ').\n'
+
+        crenca += 'iluminacao_' + cidade + '_' + lugar + '_' + descricao + '(' + usuario + ',inverno,manha,'+self.inverno_iluminacao_manha.lower() + ').\n'
+        crenca += 'iluminacao_' + cidade + '_' + lugar + '_' + descricao + '(' + usuario + ',inverno,tarde,'+self.inverno_iluminacao_tarde.lower() + ').\n'
+        crenca += 'iluminacao_' + cidade + '_' + lugar + '_' + descricao + '(' + usuario + ',inverno,noite,'+self.inverno_iluminacao_noite.lower() + ').\n'
+
+        #climatizacao nas 4 estacoes
+        crenca += 'climatizacao_' + cidade + '_' + lugar + '_' + descricao + '(' + usuario + ',primavera,manha,'+self.primavera_climatizacao_manha.lower() + ').\n'
+        crenca += 'climatizacao_' + cidade + '_' + lugar + '_' + descricao + '(' + usuario + ',primavera,tarde,'+self.primavera_climatizacao_tarde.lower() + ').\n'
+        crenca += 'climatizacao_' + cidade + '_' + lugar + '_' + descricao + '(' + usuario + ',primavera,noite,'+self.primavera_climatizacao_noite.lower() + ').\n'
+
+        crenca += 'climatizacao_' + cidade + '_' + lugar + '_' + descricao + '(' + usuario + ',verao,manha,'+self.verao_climatizacao_manha.lower() + ').\n'
+        crenca += 'climatizacao_' + cidade + '_' + lugar + '_' + descricao + '(' + usuario + ',verao,tarde,'+self.verao_climatizacao_tarde.lower() + ').\n'
+        crenca += 'climatizacao_' + cidade + '_' + lugar + '_' + descricao + '(' + usuario + ',verao,noite,'+self.verao_climatizacao_noite.lower() + ').\n'
+        
+        crenca += 'climatizacao_' + cidade + '_' + lugar + '_' + descricao + '(' + usuario + ',outono,manha,'+self.outono_climatizacao_manha.lower() + ').\n'
+        crenca += 'climatizacao_' + cidade + '_' + lugar + '_' + descricao + '(' + usuario + ',outono,tarde,'+self.outono_climatizacao_tarde.lower() + ').\n'
+        crenca += 'climatizacao_' + cidade + '_' + lugar + '_' + descricao + '(' + usuario + ',outono,noite,'+self.outono_climatizacao_noite.lower() + ').\n'
+
+        crenca += 'climatizacao_' + cidade + '_' + lugar + '_' + descricao + '(' + usuario + ',inverno,manha,'+self.inverno_climatizacao_manha.lower() + ').\n'
+        crenca += 'climatizacao_' + cidade + '_' + lugar + '_' + descricao + '(' + usuario + ',inverno,tarde,'+self.inverno_climatizacao_tarde.lower() + ').\n'
+        crenca += 'climatizacao_' + cidade + '_' + lugar + '_' + descricao + '(' + usuario + ',inverno,noite,'+self.inverno_climatizacao_noite.lower() + ').\n'
+
+        return crenca
+
+
+    def save(self, *args, **kwargs):   
+        self.crenca_webservice = self.gerar_crenca_webservice()        
+
         super(UsuarioComodo, self).save(*args, **kwargs)
          
     @property
@@ -83,4 +145,8 @@ class UsuarioComodo(models.Model):
     @property
     def get_delete_url(self):
         return reverse('usuariocomodo_delete', args=[str(self.id)])
+    
+    @property
+    def get_visualiza_url(self):
+        return reverse('usuariocomodo_detail', args=[str(self.id)])
 

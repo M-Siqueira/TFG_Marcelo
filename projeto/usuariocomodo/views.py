@@ -3,7 +3,7 @@ from django.contrib import messages
 from django.db.models import Q
 from django.shortcuts import redirect
 from django.urls import reverse
-from django.views.generic import ListView
+from django.views.generic import ListView, DetailView
 from django.views.generic.edit import CreateView, UpdateView, DeleteView
 
 from typing import Any
@@ -99,3 +99,7 @@ class UsuarioComodoDeleteView(LoginRequiredMixin, StaffRequiredMixin, DeleteView
             messages.error(request, 'Há dependências ligadas à essa relação de Usuário com Cômodo, permissão negada!')
         return redirect(self.success_url)
     
+
+class UsuarioComodoDetailView(LoginRequiredMixin, DetailView):
+    model = UsuarioComodo
+    template_name = 'usuariocomodo/usuariocomodo_detail.html'
