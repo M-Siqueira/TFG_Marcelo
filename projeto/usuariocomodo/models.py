@@ -1,3 +1,5 @@
+import json
+
 from django.db import models
 from django.urls import reverse
 
@@ -76,7 +78,17 @@ class UsuarioComodo(models.Model):
         return '%s - %s' % (self.usuario.nome, self.comodo.descricao)
 
     def gerar_json_webservice(self):
-        return ""
+
+        crenca = {
+            "servico"   : "iluminacao",
+            "cidade"    : self.comodo.cidade,
+            "lugar"     : self.comodo.lugar,
+            "descricao" : self.comodo.descricao,
+            "usuario"   : self.usuario.nome
+        }
+
+        json_crenca = json.dumps(crenca, indent=4)
+        return json_crenca
 
     def gerar_crenca_webservice(self):
         vetor_cidade = self.comodo.cidade.lower().split(" ")
