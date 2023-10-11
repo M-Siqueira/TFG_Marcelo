@@ -103,3 +103,8 @@ class UsuarioComodoDeleteView(LoginRequiredMixin, StaffRequiredMixin, DeleteView
 class UsuarioComodoDetailView(LoginRequiredMixin, DetailView):
     model = UsuarioComodo
     template_name = 'usuariocomodo/usuariocomodo_detail.html'
+
+
+class UsuarioComodoJsonDetailView(LoginRequiredMixin, DetailView):
+    model = UsuarioComodo
+    template_name = 'usuariocomodo/usuariocomodo_json_detail.html'

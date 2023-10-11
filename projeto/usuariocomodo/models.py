@@ -32,6 +32,7 @@ class UsuarioComodo(models.Model):
     comodo = models.ForeignKey('comodo.Comodo', verbose_name= 'Cômodo associado a este usuário *', on_delete=models.PROTECT, related_name='comodo')
     prioridade = models.CharField('Usuário tem prioridade neste cômodo *', max_length=3, choices=PRIORIDADE, help_text='* Campos obrigatórios')
     crenca_webservice = models.TextField('Base de crença convertida do banco para AgentSpeak(L) e Jason', max_length=1000, null=True, blank=True)
+    json_webservice = models.TextField('Base JSON convertida do banco', max_length=1000, null=True, blank=True)
         
     verao_iluminacao_manha = models.CharField('Manhã: ', max_length=10, choices=ESTAGIO, default='DESLIGADA', null=True, blank=True, help_text='Itensidade da iluminação')
     verao_iluminacao_tarde = models.CharField('Tarde', max_length=10, choices=ESTAGIO, default='DESLIGADA', null=True, blank=True, help_text='Itensidade da iluminação')
@@ -73,6 +74,9 @@ class UsuarioComodo(models.Model):
     
     def __str__(self):
         return '%s - %s' % (self.usuario.nome, self.comodo.descricao)
+
+    def gerar_json_webservice(self):
+        return ""
 
     def gerar_crenca_webservice(self):
         vetor_cidade = self.comodo.cidade.lower().split(" ")
@@ -134,7 +138,8 @@ class UsuarioComodo(models.Model):
 
 
     def save(self, *args, **kwargs):   
-        self.crenca_webservice = self.gerar_crenca_webservice()        
+        self.crenca_webservice = self.gerar_crenca_webservice()      
+        self.json_webservice = self.gerar_json_webservice()  
 
         super(UsuarioComodo, self).save(*args, **kwargs)
          
@@ -149,4 +154,8 @@ class UsuarioComodo(models.Model):
     @property
     def get_visualiza_url(self):
         return reverse('usuariocomodo_detail', args=[str(self.id)])
+    
+    @property
+    def get_visualiza_json_url(self):
+        return reverse('usuariocomodo_json_detail', args=[str(self.id)])
 

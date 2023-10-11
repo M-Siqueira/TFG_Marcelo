@@ -32,7 +32,8 @@
 			<th>Cômodo</th>
 			<th class="text-center">Prioridade</th>
 			<th class="text-center">Ativo</th>  			
-			<th class="text-center">Crença Webservice</th>  
+			<th class="text-center">Crenças Webservice</th>  
+			<th class="text-center">JSON Webservice</th>  
 			<th class="text-center">Editar</th>  			
   			<th class="text-center">Excluir</th>
   		</thead>
@@ -71,6 +72,20 @@
 						<span  data-toggle="tooltip"  title='Visualizar crenças Webservice'>
 							{% if uc.crenca_webservice %}
 								<a href="{{ uc.get_visualiza_url }}"  class="btn btn-sm btn-success">
+									{% bootstrap_icon 'eye-open' %}
+								</a>
+							{% else %}
+								<a href="" target="_blank" class="btn btn-sm btn-warning disabled">
+									{% bootstrap_icon 'eye-open' %}
+								</a>
+							{% endif %}
+						</span>
+					</td>
+
+					<td class="text-center"> 
+						<span  data-toggle="tooltip"  title='Visualizar JSON Webservice'>
+							{% if uc.crenca_webservice %}
+								<a href="{{ uc.get_visualiza_json_url }}"  class="btn btn-sm btn-success">
 									{% bootstrap_icon 'eye-open' %}
 								</a>
 							{% else %}
