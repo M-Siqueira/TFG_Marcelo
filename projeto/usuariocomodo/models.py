@@ -79,16 +79,49 @@ class UsuarioComodo(models.Model):
 
     def gerar_json_webservice(self):
 
-        crenca = {
+        crenca_iluminacao = {
             "servico"   : "iluminacao",
             "cidade"    : self.comodo.cidade,
             "lugar"     : self.comodo.lugar,
             "descricao" : self.comodo.descricao,
-            "usuario"   : self.usuario.nome
+            "usuario"   : self.usuario.nome,
+            "primavera_manha"   : self.primavera_iluminacao_manha,
+            "primavera_tarde"   : self.primavera_iluminacao_tarde,
+            "primavera_noite"   : self.primavera_iluminacao_noite,
+            "verao_manha"   : self.verao_iluminacao_manha,
+            "verao_tarde"   : self.verao_iluminacao_tarde,
+            "verao_noite"   : self.verao_iluminacao_noite,
+            "outono_manha"   : self.outono_iluminacao_manha,
+            "outono_tarde"   : self.outono_iluminacao_tarde,
+            "outono_noite"   : self.outono_iluminacao_noite,
+            "inverno_manha"   : self.inverno_iluminacao_manha,
+            "inverno_tarde"   : self.inverno_iluminacao_tarde,
+            "inverno_noite"   : self.inverno_iluminacao_noite,
         }
 
-        json_crenca = json.dumps(crenca, indent=4)
-        return json_crenca
+        crenca_climatizacao = {
+            "servico"   : "climatizacao",
+            "cidade"    : self.comodo.cidade,
+            "lugar"     : self.comodo.lugar,
+            "descricao" : self.comodo.descricao,
+            "usuario"   : self.usuario.nome,
+            "primavera_manha"   : self.primavera_climatizacao_manha,
+            "primavera_tarde"   : self.primavera_climatizacao_tarde,
+            "primavera_noite"   : self.primavera_climatizacao_noite,
+            "verao_manha"   : self.verao_climatizacao_manha,
+            "verao_tarde"   : self.verao_climatizacao_tarde,
+            "verao_noite"   : self.verao_climatizacao_noite,
+            "outono_manha"   : self.outono_climatizacao_manha,
+            "outono_tarde"   : self.outono_climatizacao_tarde,
+            "outono_noite"   : self.outono_climatizacao_noite,
+            "inverno_manha"   : self.inverno_climatizacao_manha,
+            "inverno_tarde"   : self.inverno_climatizacao_tarde,
+            "inverno_noite"   : self.inverno_climatizacao_noite,
+        }
+
+        json_crenca_iluminacao = json.dumps(crenca_iluminacao, indent=4)
+        json_crenca_climatizacao = json.dumps(crenca_climatizacao, indent=4)
+        return json_crenca_iluminacao + "\n\n" + json_crenca_climatizacao
 
     def gerar_crenca_webservice(self):
         vetor_cidade = self.comodo.cidade.lower().split(" ")
