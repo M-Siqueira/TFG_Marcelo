@@ -77,6 +77,19 @@ class UsuarioComodo(models.Model):
     def __str__(self):
         return '%s - %s' % (self.usuario.nome, self.comodo.descricao)
 
+
+    def criar_arquivo_webservice(self, texto, usuario, tipo):
+        try:
+            nome_arquivo = "projeto/uploads/"+usuario + "." + tipo
+
+            writer = open(nome_arquivo, "a", encoding='utf8')
+            writer.write(texto)
+            writer.close()
+            
+        except:
+            print("Problemas para salvar os arquivos....\n")
+            
+
     def gerar_json_webservice(self):
 
         crenca_iluminacao = {
@@ -121,7 +134,13 @@ class UsuarioComodo(models.Model):
 
         json_crenca_iluminacao = json.dumps(crenca_iluminacao, indent=4)
         json_crenca_climatizacao = json.dumps(crenca_climatizacao, indent=4)
-        return json_crenca_iluminacao + "\n\n" + json_crenca_climatizacao
+
+        #gerar o arquivo crencas_usuario.json na pasta do usuario webservice     
+        resposta = json_crenca_iluminacao + "\n\n" + json_crenca_climatizacao + "\n"
+        nome_usuario = self.usuario.nome.split()[0] + '_' + self.usuario.nome.split()[-1]
+        self.criar_arquivo_webservice(resposta, nome_usuario, "json")   
+
+        return resposta
 
     def gerar_crenca_webservice(self):
         vetor_cidade = self.comodo.cidade.lower().split(" ")
@@ -178,6 +197,9 @@ class UsuarioComodo(models.Model):
         crenca += 'climatizacao_' + cidade + '_' + lugar + '_' + descricao + '(' + usuario + ',inverno,manha,'+self.inverno_climatizacao_manha.lower() + ').\n'
         crenca += 'climatizacao_' + cidade + '_' + lugar + '_' + descricao + '(' + usuario + ',inverno,tarde,'+self.inverno_climatizacao_tarde.lower() + ').\n'
         crenca += 'climatizacao_' + cidade + '_' + lugar + '_' + descricao + '(' + usuario + ',inverno,noite,'+self.inverno_climatizacao_noite.lower() + ').\n'
+
+        #gerar o arquivo crencas_usuario.asl na pasta do usuario webservice
+        self.criar_arquivo_webservice(crenca, usuario, "asl")
 
         return crenca
 
