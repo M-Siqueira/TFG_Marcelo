@@ -1,4 +1,5 @@
 import json
+import platform
 
 from django.db import models
 from django.urls import reverse
@@ -79,19 +80,21 @@ class UsuarioComodo(models.Model):
 
 
     def criar_arquivo_webservice(self, texto, usuario, tipo):
+        # print(platform.system(), platform.release())
         try:
-            nome_arquivo = "projeto/uploads/"+usuario + "." + tipo
-
+            if ('Windows' in platform.system()):
+                nome_arquivo = "projeto/uploads/"+usuario + "." + tipo
+            else:
+                nome_arquivo = "/home/webservice/"+usuario + "." + tipo
+            # print(nome_arquivo)
             writer = open(nome_arquivo, "a", encoding='utf8')
             writer.write(texto)
-            writer.close()
-            
+            writer.close()            
         except:
             print("Problemas para salvar os arquivos....\n")
             
 
     def gerar_json_webservice(self):
-
         crenca_iluminacao = {
             "servico"   : "iluminacao",
             "cidade"    : self.comodo.cidade,
@@ -131,13 +134,12 @@ class UsuarioComodo(models.Model):
             "inverno_tarde"   : self.inverno_climatizacao_tarde,
             "inverno_noite"   : self.inverno_climatizacao_noite,
         }
-
         json_crenca_iluminacao = json.dumps(crenca_iluminacao, indent=4)
         json_crenca_climatizacao = json.dumps(crenca_climatizacao, indent=4)
 
         #gerar o arquivo crencas_usuario.json na pasta do usuario webservice     
         resposta = json_crenca_iluminacao + "\n\n" + json_crenca_climatizacao + "\n"
-        nome_usuario = self.usuario.nome.split()[0] + '_' + self.usuario.nome.split()[-1]
+        nome_usuario = self.usuario.nome.split()[0].lower() + '_' + self.usuario.nome.split()[-1].lower()
         self.criar_arquivo_webservice(resposta, nome_usuario, "json")   
 
         return resposta

@@ -1,0 +1,39 @@
+{
+    "servico": "iluminacao",
+    "cidade": "Santa Maria",
+    "lugar": "APARTAMENTO",
+    "descricao": "CHURRASQUEIRA",
+    "usuario": "ALESSANDRO DA SILVA",
+    "primavera_manha": "DESLIGADA",
+    "primavera_tarde": "DESLIGADA",
+    "primavera_noite": "FRACA",
+    "verao_manha": "DESLIGADA",
+    "verao_tarde": "DESLIGADA",
+    "verao_noite": "FRACA",
+    "outono_manha": "DESLIGADA",
+    "outono_tarde": "DESLIGADA",
+    "outono_noite": "MEDIA",
+    "inverno_manha": "DESLIGADA",
+    "inverno_tarde": "DESLIGADA",
+    "inverno_noite": "FORTE"
+}
+
+{
+    "servico": "climatizacao",
+    "cidade": "Santa Maria",
+    "lugar": "APARTAMENTO",
+    "descricao": "CHURRASQUEIRA",
+    "usuario": "ALESSANDRO DA SILVA",
+    "primavera_manha": "DESLIGADA",
+    "primavera_tarde": "DESLIGADA",
+    "primavera_noite": "MEDIA",
+    "verao_manha": "DESLIGADA",
+    "verao_tarde": "DESLIGADA",
+    "verao_noite": "MEDIA",
+    "outono_manha": "DESLIGADA",
+    "outono_tarde": "DESLIGADA",
+    "outono_noite": "DESLIGADA",
+    "inverno_manha": "DESLIGADA",
+    "inverno_tarde": "DESLIGADA",
+    "inverno_noite": "DESLIGADA"
+}
