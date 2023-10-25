@@ -85,7 +85,7 @@ class UsuarioComodo(models.Model):
             if ('Windows' in platform.system()):
                 nome_arquivo = "projeto/uploads/"+usuario + "." + tipo
             else:
-                nome_arquivo = "/home/webservice/"+usuario + "." + tipo
+                nome_arquivo = "/home/webservice/webservice/"+usuario + "." + tipo
             # print(nome_arquivo)
             writer = open(nome_arquivo, "a", encoding='utf8')
             writer.write(texto)
